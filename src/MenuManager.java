@@ -2,6 +2,10 @@ import java.util.Scanner;    										// scanner 클래스 import
 
 public class MenuManager {   										// 
 	
+	static int income;			// 인스턴스 변수 income 선언
+	static int expense;			// 인스턴스 변수 expense 선언
+	static String content;		// 인스턴스 변수 content 선언
+	
 	public static void main(String[] args) {  						// main 함수 
 		int num = 0;        				  						// int num 선언 및 0 저장
 		Scanner input = new Scanner(System.in);						// 스캐너 생성
@@ -15,31 +19,50 @@ public class MenuManager {   										//
 			System.out.println("6. Exit");							
 			System.out.println("Select one number between 1-6: ");	// 1-6번 중에서 선택하라는 말 출력
 			num = input.nextInt();									// 입력받은 숫자를 저장한다 num에 저장한다
-			int income = 0; 										// 정수 income expense balance 선언 후 0저장
-			int expense = 0; 
-			int balance = 0;
-			switch(num) {											// switch case 문 시작
-			case 1:													// num이 1일때
-				System.out.println("Income: ");						// income에 대한 입력을 알리는 문장 출력
-				income = input.nextInt();							// income 선언 후 입력받은 값 저장
-				System.out.println("Content: ");					// content에 대한 입력을 알리는 문장 출력
-				String content = input.next();						// content 선언 후 입력받은 내용 저장
-				break;												// 1번 내용일 때 행동 끝
-			case 2:													// num이 2일때
-				System.out.println("Expense: ");					// expense에 대한 입력을 알리는 문장 출력
-				expense = input.nextInt();							// expense 선언 후 입력받은 값 저장
-				System.out.println("Content: ");					// content2에 대한 입력을 알리는 문장 출력
-				String content2 = input.next();						// content2 선언 후 내용 저장
-				break;												// 2번 일 때 내용 끝
-			case 3:													// num이 3 일 때
-				System.out.println("Content: ");					// 편집할 content에 대한 입력을 알리는 문장 출력
-				String edit = input.next();							// edit 선언 후 입력 받은 내용 저장
-				break;												// 3번일때 끝
-			case 4:													// num이 4일때
-				balance = income - expense;							//
-				System.out.printf("Balance: %d\n", balance);		// balance 출력
-				break;												// 4일 때 끝
-			}														// switch case 문 종료
-		}															// 반복문 끝
-	}																// main 함수 종료
-}																	// class 종료
+			if(num == 1) {			// 입력 받은 num이 1일 때
+				addincome();		// addincome 메서드로 이동
+			}
+			else if(num == 2) {		// 2일 때
+				substract();		// substract 메서드로 이동
+			}
+			else if(num == 3) {		// 3일 때
+				edit();				// edit 메서드로 이동
+			}
+			else if(num == 4) {		// 4일 때
+				balance();			// balance 메서드로 이동
+			}
+		}
+	}
+	
+	public static void addincome() {
+		Scanner input = new Scanner(System.in);	// scanner 객체 생성
+		System.out.print("Income: ");		// 수입을 입력하라는 문장 출력
+		income = input.nextInt();			// 인스턴스 변수 income에 입력받은 값 할당
+		System.out.print("Content: ");		// 내용을 입력하라는 문장 출력
+		content = input.next();				// 인스턴스 변수 content에 입력받은 값 할당
+		System.out.print("Place: ");		// 장소를 입력하라는 문장 출력
+		String place = input.next();		// 문자열 place에 입력받은 값 할당
+	}
+	
+	public static void substract() {
+		Scanner input = new Scanner(System.in);	//scanner 객체 생성
+		System.out.print("Expense: ");		// 소비를 입력하라는 문장 출력
+		expense = input.nextInt();			// 인스턴스 변수 expense에 입력받은 값 할당
+		System.out.print("Content: ");		// 내용을 입력하라는 문장 출력
+		String content2 = input.next();		// 문자열 content2에 내용 할당
+		System.out.print("Place: ");		// 장소를 입력하라는 문장 출력
+		String place2 = input.next();		// 문자열 place2에 입력받은 값 할당
+	}
+	
+	public static void edit() {
+		Scanner input = new Scanner(System.in);	// scanner 객체 생성
+		System.out.print("Content: ");		// 내용 입력하라는 문장 출력
+		String edit = input.next();			// edit 문자열에 입력받은 값 할당
+		content = edit;						// 인스턴스 변수 content에 edit 할당
+	}
+	
+	public static void balance() {
+		int balance = income - expense;		// 잔액을 계산하는 식
+		System.out.printf("Balance: %d\n", balance); 	// 잔액을 출력
+	}
+}
