@@ -23,4 +23,4 @@ public class Money {
 		System.out.println("Days: " + days + "Income: " + income + "Expense: " + expense + "Content: " + content 
 				+ "Balance: " + balance + "Content: " + content + "Place: " + place);
 	}
-}
+} 

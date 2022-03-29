@@ -64,4 +64,4 @@ public class MoneyManager {
 			System.out.printf("Balance: %d\n", day.balance); 	// 잔액을 출력
 		}
 	}
-}
+} 

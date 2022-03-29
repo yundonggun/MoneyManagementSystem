@@ -27,7 +27,7 @@ public class MenuManager {   										//
 				moneyManager.balance();			// balance 메서드로 이동
 			}
 		}
-	}
+	} 
 	
 	
 }
