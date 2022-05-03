@@ -2,8 +2,8 @@ package Money;
 
 import java.util.Scanner;
 
-public class Date {
-	protected Month month = Month.Month30;
+public abstract class Date {
+	protected Month month = Month.Month30;		// default 값 설정
 	protected int income;
 	protected int expense;
 	protected String content;
@@ -14,7 +14,8 @@ public class Date {
 	public Date() {
 	}		// 기본 생성자
 	
-	public Date(int day, int income, int expense, String content, String place) {
+	public Date(String month1, int day, int income, int expense, String content, String place) {
+		this.month1 = month1;
 		this.day = day;
 		this.income = income;
 		this.expense = expense;
@@ -22,6 +23,9 @@ public class Date {
 		this.place = place;
 	}		// 생성자
 	
+	public Date(Month month30) {
+	}
+
 	public Month getMonth() {
 		return month;
 	}
@@ -78,29 +82,5 @@ public class Date {
 		this.day = day;
 	}
 	
-	public void printInfo() {
-		System.out.println("Month: " + month1 + " Day: " + day + " Income: " + income + " Expense: " + expense + " Content: " + content 
-				+ " Place: " + place + " Balance: " + (income - expense));
-	}
-	
-	public void getUserInput(Scanner input) {
-		System.out.print("Month: ");
-		String month1 = input.next();
-		this.setMonth1(month1);
-		System.out.print("Day: ");		// 날짜 입력
-		int day = input.nextInt();		// 입력한 내용 저장
-		this.setDay(day);
-		System.out.print("Income: ");		// 수입을 입력하라는 문장 출력
-		int income = input.nextInt();		// income에 입력받은 값 할당
-		this.setIncome(income);
-		System.out.print("Expense: ");
-		int expense = input.nextInt();
-		this.setExpense(expense);
-		System.out.print("Content: ");		// 내용을 입력하라는 문장 출력
-		String content = input.next();			// content에 입력받은 값 할당
-		this.setContent(content);
-		System.out.print("Place: ");		// 장소를 입력하라는 문장 출력
-		String place = input.next();
-		this.setPlace(place);
-	}
+	public abstract void printInfo();
 }

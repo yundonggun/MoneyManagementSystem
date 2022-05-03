@@ -2,9 +2,17 @@ package Money;
 
 import java.util.Scanner;
 
-public class Month31 extends Date {
+public class Month31 extends Date implements DateInput {
+	public Month31() {
+		
+	}
+	
+	public Month31(Month month31) {
+		
+	}
+
 	public void getUserInput(Scanner input) {
-		System.out.print("Month: ");
+		System.out.print("Month(ex: January): ");
 		String month1 = input.next();
 		this.setMonth1(month1);
 		
@@ -37,5 +45,10 @@ public class Month31 extends Date {
 		System.out.print("Place: ");
 		String place = input.next();
 		this.setPlace(place);
+	}
+	
+	public void printInfo() {
+		System.out.println("Month: " + month1 + " Day: " + day + " Income: " + income + " Expense: " + expense + 
+				" Content: " + content + " Place: " + place + " Balance: " + (income - expense));
 	}
 }

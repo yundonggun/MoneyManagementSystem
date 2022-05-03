@@ -1,86 +1,88 @@
 import java.util.Scanner;
 import Money.Date;
+import Money.DateInput;
 import Money.February;
+import Money.Month;
 import Money.Month30;
 import Money.Month31;
 
 import java.util.ArrayList;
 
 public class MoneyManager {
-	ArrayList<Date> dates = new ArrayList<Date>();		// 클래스 레벨에서 배열 day 생성
+	ArrayList<DateInput> dates = new ArrayList<DateInput>();		// 클래스 레벨에서 arraylist date 생성
 	Scanner input;		// 클래스 내용에 필드에 입력
 	MoneyManager(Scanner input) {
 		this.input = input;	
 	}
 	
 	public void addContent() {
-		int month = 0;
-		Date date;
-		while (month != 1 && month != 2 && month != 3) {
+		int num = 0;
+		DateInput dateInput;	// 생성자
+		while (num != 1 && num != 2 && num != 3) {	// 입력받은 num이 1, 2, 3 모두 아닐때까지 반복
 			System.out.print("1 for Months with 30 days, ");
 			System.out.print("2 for Months with 31 days, ");
 			System.out.println("3 for February");
-			System.out.print("Select num for Quater between 1 - 3: ");
-			month = input.nextInt();
-			if(month == 1) {
-				date = new Month30();
-				date.getUserInput(input);
-				dates.add(date);
+			System.out.print("Select num between 1 - 3: ");
+			num = input.nextInt();
+			if(num == 1) {
+				dateInput = new Month30(Month.Month30);	// dynamic binding
+				dateInput.getUserInput(input);	// getUserInput 메서드로 입력 받음
+				dates.add(dateInput);	// arraylist에 date 추가
 				break;
 			}
-			else if(month == 2) {
-				date = new Month31();
-				date.getUserInput(input);
-				dates.add(date);
+			else if(num == 2) {
+				dateInput = new Month31(Month.Month31);
+				dateInput.getUserInput(input);
+				dates.add(dateInput);
 				break;
 			}
-			else if(month == 3) {
-				date = new February();
-				date.getUserInput(input);
-				dates.add(date);
+			else if(num == 3) {
+				dateInput = new February(Month.February);
+				dateInput.getUserInput(input);
+				dates.add(dateInput);
 				break;
 			}
 			else {
-				System.out.println("Select num for Quater between 1 - 3");
-			}
+				System.out.println("Select num between 1 - 3");
+			}	// 1, 2, 3이 아닌 다른 수를 입력했을 때
 		}
 		
 	}
 	
 	public void deleteContent() {				
 		System.out.print("Month: ");
-		String somemonth = input.next();
+		String somemonth = input.next();	// 월 저장
 		System.out.print("Day: ");			// 날짜 입력
 		int someday = input.nextInt();		// 날짜 저장
 		int index = -1;
 		for(int i = 0; i < dates.size(); i++) {
-			if(dates.get(i).getMonth1().equals(somemonth)) {			// 입력한 날짜와 처음 날짜가 같으면
+			if(dates.get(i).getMonth1().equals(somemonth)) {			// 배열에 저장된 값과 입력받은 값이 같으면
 				if(dates.get(i).getDay() == someday) {
-					index = i;
+					index = i;		// index에 i로 저장
 				break;
 				}
 			}
 		}
-		if (index >= 0) {
+		if (index >= 0) {		
 			dates.remove(index);
-			System.out.println("The data of " + somemonth + " " + someday + " is deleted");
-		}
+			System.out.println("The data of " + somemonth + " " + someday + " is deleted.");
+		}			// 저장된 index 값이 0이상이면 배열의 index번째 값 삭제
 		else {
-			System.out.println("The day has not been register");
-			return;
+			System.out.println("The day has not been registered.");
+			return;		// index 값이 변하지 않으면 등록된 날이 없다고 출력.
 		}
 	}
 	
 	public void editContent() {
-		System.out.print("Month: ");
-		String somemonth = input.next();
+		System.out.print("Month: ");	
+		String somemonth = input.next();	// 입력받은 월 저장
 		System.out.print("Days: ");
-		int someday = input.nextInt();
+		int someday = input.nextInt();		// 입력받은 일 저장
 		for(int i = 0; i < dates.size(); i++) {
-			Date date = dates.get(i);
-			if(date.getMonth1().equals(somemonth)) {
-				if(date.getDay() == someday) {
-					int num = -1;
+			DateInput dateInput = dates.get(i);	// date에 arraylist 값 저장
+			if(dateInput.getMonth1().equals(somemonth)) {	// getMonth1값과 입력받은 값이 같을 때
+				if(dateInput.getDay() == someday) {	// getDay와 입력받은 값이 같을 때
+					int num = -1;	// num = -1로 초기화
 					while(num!= 5) {
 						System.out.println("*** Money Manager ***");
 						System.out.println("1. Edit Income");	
@@ -93,38 +95,38 @@ public class MoneyManager {
 						if (num == 1) {
 							System.out.print("Income: ");
 							int income = input.nextInt();
-							date.setIncome(income);
+							dateInput.setIncome(income);	// income을 재설정
 						}
 						else if (num == 2) {
 							System.out.print("Expense: ");
 							int expense = input.nextInt();
-							date.setExpense(expense);
+							dateInput.setExpense(expense);	// expense 재설정
 						}
 						else if (num == 3) {
 							System.out.print("Content: ");
 							String content = input.next();
-							date.setContent(content);
+							dateInput.setContent(content);	// content 재설정
 						}
 						else if (num == 4) {
 							System.out.print("Place: ");
 							String place = input.next();
-							date.setPlace(place);
+							dateInput.setPlace(place);	// place 재설정
 						}
 						else {
 							continue;
 						}
 					} // while
 				} // if
+				else {
+					System.out.println("The day has not been registered.");	// 입력한 날이 같지 않다면 출력
+				} // else
 			} // if
-			else {
-				System.out.println("No Data");
-			} // else
 		} // for
 	}
 	
 	public void showContent() {
 		for(int i = 0; i < dates.size(); i++) {
-			dates.get(i).printInfo();
+			dates.get(i).printInfo();	// printInfo 메서드로 arraylist의 내용 출력
 		}
 	}
 }
