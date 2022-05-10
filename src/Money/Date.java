@@ -2,6 +2,8 @@ package Money;
 
 import java.util.Scanner;
 
+import exception.Month1FormatException;
+
 public abstract class Date {
 	protected Month month = Month.Month30;		// default 값 설정
 	protected int income;
@@ -70,7 +72,13 @@ public abstract class Date {
 		return month1;
 	}
 
-	public void setMonth1(String month1) {
+	public void setMonth1(String month1) throws Month1FormatException {	// 예외가 생기면 Month1FormatException으로
+		if(month1.contains("1") || month1.contains("2") || month1.contains("3") || month1.contains("4") ||
+				month1.contains("5") || month1.contains("6") || month1.contains("7") || month1.contains("8") ||
+				month1.contains("9") || month1.contains("10") || month1.contains("11") || month1.contains("12")) {	
+				// month1이 1부터 12까지를 포함할 때 반복 발생
+			throw new Month1FormatException();	// 예외를 발생기시킴
+		}
 		this.month1 = month1;
 	}
 	

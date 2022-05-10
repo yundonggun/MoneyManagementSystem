@@ -5,8 +5,8 @@ import Money.February;
 import Money.Month;
 import Money.Month30;
 import Money.Month31;
-
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 
 public class MoneyManager {
 	ArrayList<DateInput> dates = new ArrayList<DateInput>();		// 클래스 레벨에서 arraylist date 생성
@@ -19,34 +19,42 @@ public class MoneyManager {
 		int num = 0;
 		DateInput dateInput;	// 생성자
 		while (num != 1 && num != 2 && num != 3) {	// 입력받은 num이 1, 2, 3 모두 아닐때까지 반복
-			System.out.print("1 for Months with 30 days, ");
-			System.out.print("2 for Months with 31 days, ");
-			System.out.println("3 for February");
-			System.out.print("Select num between 1 - 3: ");
-			num = input.nextInt();
-			if(num == 1) {
-				dateInput = new Month30(Month.Month30);	// dynamic binding
-				dateInput.getUserInput(input);	// getUserInput 메서드로 입력 받음
-				dates.add(dateInput);	// arraylist에 date 추가
-				break;
+			try {
+				System.out.print("1 for Months with 30 days, ");
+				System.out.print("2 for Months with 31 days, ");
+				System.out.println("3 for February");
+				System.out.print("Select num between 1 - 3: ");
+				num = input.nextInt();
+				if(num == 1) {
+					dateInput = new Month30(Month.Month30);	// dynamic binding
+					dateInput.getUserInput(input);	// getUserInput 메서드로 입력 받음
+					dates.add(dateInput);	// arraylist에 date 추가
+					break;
+				}
+				else if(num == 2) {
+					dateInput = new Month31(Month.Month31);
+					dateInput.getUserInput(input);
+					dates.add(dateInput);
+					break;
+				}
+				else if(num == 3) {
+					dateInput = new February(Month.February);
+					dateInput.getUserInput(input);
+					dates.add(dateInput);
+					break;
+				}
+				else {
+					System.out.println("Please input an integer between 1 - 3");
+				}	// 1, 2, 3이 아닌 다른 수를 입력했을 때
 			}
-			else if(num == 2) {
-				dateInput = new Month31(Month.Month31);
-				dateInput.getUserInput(input);
-				dates.add(dateInput);
-				break;
+			catch(InputMismatchException e) {
+				System.out.println("Error. Please input an integer between 1 - 3");
+				if(input.hasNext()) {
+					input.next();
+				}
+				num = 0;
 			}
-			else if(num == 3) {
-				dateInput = new February(Month.February);
-				dateInput.getUserInput(input);
-				dates.add(dateInput);
-				break;
-			}
-			else {
-				System.out.println("Select num between 1 - 3");
-			}	// 1, 2, 3이 아닌 다른 수를 입력했을 때
 		}
-		
 	}
 	
 	public void deleteContent() {				
@@ -76,52 +84,69 @@ public class MoneyManager {
 	public void editContent() {
 		System.out.print("Month: ");	
 		String somemonth = input.next();	// 입력받은 월 저장
-		System.out.print("Days: ");
-		int someday = input.nextInt();		// 입력받은 일 저장
-		for(int i = 0; i < dates.size(); i++) {
-			DateInput dateInput = dates.get(i);	// date에 arraylist 값 저장
-			if(dateInput.getMonth1().equals(somemonth)) {	// getMonth1값과 입력받은 값이 같을 때
-				if(dateInput.getDay() == someday) {	// getDay와 입력받은 값이 같을 때
-					int num = -1;	// num = -1로 초기화
-					while(num!= 5) {
-						System.out.println("*** Money Manager ***");
-						System.out.println("1. Edit Income");	
-						System.out.println("2. Edit Expense");
-						System.out.println("3. Edit Content");
-						System.out.println("4. Edit Place");
-						System.out.println("5. Exit");		
-						System.out.println("Select oen number between 1 - 5");
-						num = input.nextInt();
-						if (num == 1) {
-							System.out.print("Income: ");
-							int income = input.nextInt();
-							dateInput.setIncome(income);	// income을 재설정
-						}
-						else if (num == 2) {
-							System.out.print("Expense: ");
-							int expense = input.nextInt();
-							dateInput.setExpense(expense);	// expense 재설정
-						}
-						else if (num == 3) {
-							System.out.print("Content: ");
-							String content = input.next();
-							dateInput.setContent(content);	// content 재설정
-						}
-						else if (num == 4) {
-							System.out.print("Place: ");
-							String place = input.next();
-							dateInput.setPlace(place);	// place 재설정
-						}
-						else {
-							continue;
-						}
-					} // while
+		try {
+			System.out.print("Days: ");
+			int someday = input.nextInt();		// 입력받은 일 저장
+			for(int i = 0; i < dates.size(); i++) {
+				DateInput dateInput = dates.get(i);	// date에 arraylist 값 저장
+				if(dateInput.getMonth1().equals(somemonth)) {	// getMonth1값과 입력받은 값이 같을 때
+					if(dateInput.getDay() == someday) {	// getDay와 입력받은 값이 같을 때
+						int num = -1;	// num = -1로 초기화
+						while(num!= 5) {
+							try {
+								System.out.println("*** Money Manager ***");
+								System.out.println("1. Edit Income");	
+								System.out.println("2. Edit Expense");
+								System.out.println("3. Edit Content");
+								System.out.println("4. Edit Place");
+								System.out.println("5. Exit");		
+								System.out.print("Select one number between 1 - 5: ");
+								num = input.nextInt();
+								if (num == 1) {
+									System.out.print("Income: ");
+									int income = input.nextInt();
+									dateInput.setIncome(income);	// income을 재설정
+								}
+								else if (num == 2) {
+									System.out.print("Expense: ");
+									int expense = input.nextInt();
+									dateInput.setExpense(expense);	// expense 재설정
+								}
+								else if (num == 3) {
+									System.out.print("Content: ");
+									String content = input.next();
+									dateInput.setContent(content);	// content 재설정
+								}
+								else if (num == 4) {
+									System.out.print("Place: ");
+									String place = input.next();
+									dateInput.setPlace(place);	// place 재설정
+								}
+								else {
+									continue;
+								}
+							} 
+							catch(InputMismatchException e) {
+								System.out.println("Error. Please input an integer between 1 - 5");
+								if(input.hasNext()) {
+									input.next();
+								}
+								num = -1;
+							}
+						} // while
+					} // if
+					else {
+						System.out.println("The day has not been registered.");	// 입력한 날이 같지 않다면 출력
+					} // else
 				} // if
-				else {
-					System.out.println("The day has not been registered.");	// 입력한 날이 같지 않다면 출력
-				} // else
-			} // if
-		} // for
+			} // for
+		} 
+		catch(InputMismatchException e) {
+			System.out.println("Error. Please input an integer between 1 - 5");
+			if(input.hasNext()) {
+				input.next();
+			}
+		}
 	}
 	
 	public void showContent() {

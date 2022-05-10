@@ -2,6 +2,8 @@ package Money;
 
 import java.util.Scanner;
 
+import exception.Month1FormatException;
+
 public class February extends Date implements DateInput {
 	public February() {
 		
@@ -12,7 +14,11 @@ public class February extends Date implements DateInput {
 	}
 
 	public void getUserInput(Scanner input) {
-		this.setMonth1("February");
+		try {
+			this.setMonth1("February");
+		} catch (Month1FormatException e) {
+			e.printStackTrace();
+		}
 		
 		int day1 = 0;
 		while(day1 <= 0 || day1 >= 29) {

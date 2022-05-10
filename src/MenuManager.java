@@ -1,34 +1,52 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;    										// scanner 클래스 import
 
 public class MenuManager {   										// 
 	public static void main(String[] args) {  						// main 함수 
 		Scanner input = new Scanner(System.in);						// 스캐너 생성
 		MoneyManager moneyManager = new MoneyManager(input);		// 메모리할당
-		
+		showMenu();
 		int num = 0;        				  						// int num 선언 및 0 저장
 		while(num != 5) {											// 입력받은 num 값이 5이 아닐 때 반복문 수행
-			System.out.println("*** Money Manager ***");
-			System.out.println("1. Add Content");					// 1-5번까지 메뉴 출력
-			System.out.println("2. Delete Content");
-			System.out.println("3. Edit Content");
-			System.out.println("4. Show Content");
-			System.out.println("5. Exit");							
-			System.out.print("Select one number between 1-5: ");	// 1-5번 중에서 선택하라는 말 출력
-			num = input.nextInt();									// 입력받은 숫자를 저장한다 num에 저장한다
-			if(num == 1) {			// 입력 받은 num이 1일 때
-				moneyManager.addContent();		// addContent 메서드로 이동
+			try {
+				num = input.nextInt();									// 입력받은 숫자를 저장한다 num에 저장한다
+				if(num == 1) {			// 입력 받은 num이 1일 때
+					moneyManager.addContent();		// addContent 메서드로 이동
+				}
+				else if(num == 2) {		// 2일 때
+					moneyManager.deleteContent();		// deleteContent 메서드로 이동
+				}
+				else if(num == 3) {		// 3일 때
+					moneyManager.editContent();				// editContent 메서드로 이동
+				}
+				else if(num == 4) {		// 4일 때
+					moneyManager.showContent();		// showContent 메서드로 이동
+				}
+				else if(num == 5) {
+					break;
+				}
+				showMenu();
 			}
-			else if(num == 2) {		// 2일 때
-				moneyManager.deleteContent();		// deleteContent 메서드로 이동
+			catch(InputMismatchException e) {
+				System.out.println("Error. Please input an integer between 1 - 5");
+				if(input.hasNext()) {	// 입력 받은 값이 있으면 없애고 
+					input.next();		// 다시 사용자에게 값 입력 받음
+				}
+				num = 0;
+				showMenu();
 			}
-			else if(num == 3) {		// 3일 때
-				moneyManager.editContent();				// editContent 메서드로 이동
-			}
-			else if(num == 4) {		// 4일 때
-				moneyManager.showContent();			// showContent 메서드로 이동
-			}
-		}
+		}	
 	} 	
+	
+	public static void showMenu() {
+		System.out.println("*** Money Manager ***");
+		System.out.println("1. Add Content");					// 1-5번까지 메뉴 출력
+		System.out.println("2. Delete Content");
+		System.out.println("3. Edit Content");
+		System.out.println("4. Show Content");
+		System.out.println("5. Exit");							
+		System.out.print("Select one number between 1 - 5: ");	// 1-5번 중에서 선택하라는 말 출력
+	}
 }
 /* 클래스 설명
 1. 기능

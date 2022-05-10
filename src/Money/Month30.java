@@ -2,15 +2,26 @@ package Money;
 
 import java.util.Scanner;
 
+import exception.Month1FormatException;
+
 public class Month30 extends Date implements DateInput {
 	public Month30(Month month30) {
 		
 	}
 
 	public void getUserInput(Scanner input) {
-		System.out.print("Month(ex: April): ");
-		String month1 = input.next();
-		this.setMonth1(month1);
+		String month1 = "1";		// 반복문을 실행하기 위해 month1에 1 저장
+		while(month1.contains("1") || month1.contains("2") || month1.contains("3") || month1.contains("4") ||
+				month1.contains("5") || month1.contains("6") || month1.contains("7") || month1.contains("8") ||
+				month1.contains("9") || month1.contains("10") || month1.contains("11") || month1.contains("12")) {
+			System.out.print("Month(ex: April): ");
+			month1 = input.next();
+			try {
+				this.setMonth1(month1);		// setMonth1을 했을 때
+			} catch (Month1FormatException e) {	// 예외가 생기면
+				System.out.println("Please input like April, not 4");	// 다시 입력하라는 메시지
+			}
+		}
 		
 		int day1 = 0;
 		while(day1 <= 0 || day1 >= 31) {
