@@ -10,20 +10,21 @@ public class MenuManager {   										//
 		while(num != 5) {											// 입력받은 num 값이 5이 아닐 때 반복문 수행
 			try {
 				num = input.nextInt();									// 입력받은 숫자를 저장한다 num에 저장한다
-				if(num == 1) {			// 입력 받은 num이 1일 때
+				switch(num) {
+				case 1:		// 입력 받은 num이 1일 때
 					moneyManager.addContent();		// addContent 메서드로 이동
-				}
-				else if(num == 2) {		// 2일 때
-					moneyManager.deleteContent();		// deleteContent 메서드로 이동
-				}
-				else if(num == 3) {		// 3일 때
-					moneyManager.editContent();				// editContent 메서드로 이동
-				}
-				else if(num == 4) {		// 4일 때
-					moneyManager.showContent();		// showContent 메서드로 이동
-				}
-				else if(num == 5) {
 					break;
+				case 2:		// 2일 때
+					moneyManager.deleteContent();	// deleteContent 메서드로 이동
+					break;
+				case 3:		// 3일 때
+					moneyManager.editContent();		// editContent 메서드로 이동
+					break;
+				case 4:		// 4일 때
+					moneyManager.showContent();		// showContent 메서드로 이동
+					break;
+				default: 
+					continue;
 				}
 				showMenu();
 			}

@@ -62,23 +62,8 @@ public class MoneyManager {
 		String somemonth = input.next();	// 월 저장
 		System.out.print("Day: ");			// 날짜 입력
 		int someday = input.nextInt();		// 날짜 저장
-		int index = -1;
-		for(int i = 0; i < dates.size(); i++) {
-			if(dates.get(i).getMonth1().equals(somemonth)) {			// 배열에 저장된 값과 입력받은 값이 같으면
-				if(dates.get(i).getDay() == someday) {
-					index = i;		// index에 i로 저장
-				break;
-				}
-			}
-		}
-		if (index >= 0) {		
-			dates.remove(index);
-			System.out.println("The data of " + somemonth + " " + someday + " is deleted.");
-		}			// 저장된 index 값이 0이상이면 배열의 index번째 값 삭제
-		else {
-			System.out.println("The day has not been registered.");
-			return;		// index 값이 변하지 않으면 등록된 날이 없다고 출력.
-		}
+		int index = findIndex(somemonth, someday);
+		removefromDates(index, somemonth, someday);
 	}
 	
 	public void editContent() {
@@ -94,35 +79,22 @@ public class MoneyManager {
 						int num = -1;	// num = -1로 초기화
 						while(num!= 5) {
 							try {
-								System.out.println("*** Money Manager ***");
-								System.out.println("1. Edit Income");	
-								System.out.println("2. Edit Expense");
-								System.out.println("3. Edit Content");
-								System.out.println("4. Edit Place");
-								System.out.println("5. Exit");		
-								System.out.print("Select one number between 1 - 5: ");
+								showEditMenu();
 								num = input.nextInt();
-								if (num == 1) {
-									System.out.print("Income: ");
-									int income = input.nextInt();
-									dateInput.setIncome(income);	// income을 재설정
-								}
-								else if (num == 2) {
-									System.out.print("Expense: ");
-									int expense = input.nextInt();
-									dateInput.setExpense(expense);	// expense 재설정
-								}
-								else if (num == 3) {
-									System.out.print("Content: ");
-									String content = input.next();
-									dateInput.setContent(content);	// content 재설정
-								}
-								else if (num == 4) {
-									System.out.print("Place: ");
-									String place = input.next();
-									dateInput.setPlace(place);	// place 재설정
-								}
-								else {
+								switch(num) {
+								case 1:
+									dateInput.setUserIncome(input);
+									break;
+								case 2:
+									dateInput.setUserExpense(input);
+									break;
+								case 3:
+									dateInput.setUserContent(input);
+									break;
+								case 4:
+									dateInput.setUserPlace(input);
+									break;
+								default:
 									continue;
 								}
 							} 
@@ -153,5 +125,40 @@ public class MoneyManager {
 		for(int i = 0; i < dates.size(); i++) {
 			dates.get(i).printInfo();	// printInfo 메서드로 arraylist의 내용 출력
 		}
+	}
+	
+	public int findIndex(String somemonth, int someday) {
+		int index = -1;
+		for(int i = 0; i < dates.size(); i++) {
+			if(dates.get(i).getMonth1().equals(somemonth)) {			// 배열에 저장된 값과 입력받은 값이 같으면
+				if(dates.get(i).getDay() == someday) {
+					index = i;		// index에 i로 저장
+				break;
+				}
+			}
+		}
+		return index;
+	}
+	
+	public int removefromDates(int index, String somemonth, int someday) {
+		if (index >= 0) {		
+			dates.remove(index);
+			System.out.println("The data of " + somemonth + " " + someday + " is deleted.");
+			return 1;
+		}			// 저장된 index 값이 0이상이면 배열의 index번째 값 삭제
+		else {
+			System.out.println("The day has not been registered.");
+			return -1;	// index 값이 변하지 않으면 등록된 날이 없다고 출력.
+		}
+	}
+	
+	public void showEditMenu() {
+		System.out.println("*** Money Manager ***");
+		System.out.println("1. Edit Income");	
+		System.out.println("2. Edit Expense");
+		System.out.println("3. Edit Content");
+		System.out.println("4. Edit Place");
+		System.out.println("5. Exit");		
+		System.out.print("Select one number between 1 - 5: ");
 	}
 }

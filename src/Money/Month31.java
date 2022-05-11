@@ -1,14 +1,9 @@
 package Money;
 
 import java.util.Scanner;
-
 import exception.Month1FormatException;
 
-public class Month31 extends Date implements DateInput {
-	public Month31() {
-		
-	}
-	
+public class Month31 extends Date {
 	public Month31(Month month31) {
 		
 	}
@@ -41,21 +36,10 @@ public class Month31 extends Date implements DateInput {
 			}		// 입력 받은 날짜가 0보다 크거나 29보다 작을 때 day에 입력받은 값을 저장하고 setDay로 저장한다. 
 		}	// 아니면 문장을 출력하고 다시 값을 입력 받는다.
 		
-		System.out.print("Income: ");	
-		int income = input.nextInt();	
-		this.setIncome(income);
-			
-		System.out.print("Expense: ");
-		int expense = input.nextInt();
-		this.setExpense(expense);
-			
-		System.out.print("Content: ");	
-		String content = input.next();
-		this.setContent(content);
-			
-		System.out.print("Place: ");
-		String place = input.next();
-		this.setPlace(place);
+		setUserIncome(input);
+		setUserExpense(input);
+		setUserContent(input);
+		setUserPlace(input);
 	}
 	
 	public void printInfo() {

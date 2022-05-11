@@ -1,10 +1,9 @@
 package Money;
 
 import java.util.Scanner;
-
 import exception.Month1FormatException;
 
-public abstract class Date {
+public abstract class Date implements DateInput {
 	protected Month month = Month.Month30;		// default °ª ¼³Á¤
 	protected int income;
 	protected int expense;
@@ -90,5 +89,30 @@ public abstract class Date {
 		this.day = day;
 	}
 	
+	public void setUserIncome(Scanner input) {
+		System.out.print("Income: ");
+		int income = input.nextInt();
+		this.setIncome(income);	
+	}
+			
+	public void setUserExpense(Scanner input) {
+		System.out.print("Expense: ");
+		int expense = input.nextInt();
+		this.setExpense(expense);	
+	}
+			
+	public void setUserContent(Scanner input) {
+		System.out.print("Content: ");
+		String content = input.next();
+		this.setContent(content);	
+	}
+			
+	public void setUserPlace(Scanner input) {
+		System.out.print("Place: ");
+		String place = input.next();
+		this.setPlace(place);	
+	}
+	
 	public abstract void printInfo();
+	
 }
