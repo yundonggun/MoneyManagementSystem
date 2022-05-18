@@ -1,16 +1,18 @@
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
-import Money.Date;
+
 import Money.DateInput;
 import Money.February;
 import Money.Month;
 import Money.Month30;
 import Money.Month31;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
 
-public class MoneyManager {
+public class MoneyManager implements Serializable {
+	private static final long serialVersionUID = 1145197048678055359L;	// serializable
 	ArrayList<DateInput> dates = new ArrayList<DateInput>();		// 클래스 레벨에서 arraylist date 생성
-	Scanner input;		// 클래스 내용에 필드에 입력
+	transient Scanner input;		// 클래스 내용에 필드에 입력
 	MoneyManager(Scanner input) {
 		this.input = input;	
 	}
@@ -20,9 +22,7 @@ public class MoneyManager {
 		DateInput dateInput;	// 생성자
 		while (num != 1 && num != 2 && num != 3) {	// 입력받은 num이 1, 2, 3 모두 아닐때까지 반복
 			try {
-				System.out.print("1 for Months with 30 days, ");
-				System.out.print("2 for Months with 31 days, ");
-				System.out.println("3 for February");
+				System.out.println("1 for Months with 30 days, 2 for Months with 31 days, 3 for February");
 				System.out.print("Select num between 1 - 3: ");
 				num = input.nextInt();
 				if(num == 1) {
@@ -46,14 +46,13 @@ public class MoneyManager {
 				else {
 					System.out.println("Please input an integer between 1 - 3");
 				}	// 1, 2, 3이 아닌 다른 수를 입력했을 때
-			}
-			catch(InputMismatchException e) {
+			} catch(InputMismatchException e) {
 				System.out.println("Error. Please input an integer between 1 - 3");
 				if(input.hasNext()) {
 					input.next();
 				}
 				num = 0;
-			}
+			} 
 		}
 	}
 	

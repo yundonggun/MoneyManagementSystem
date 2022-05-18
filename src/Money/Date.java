@@ -1,9 +1,11 @@
 package Money;
 
+import java.io.Serializable;
 import java.util.Scanner;
 import exception.Month1FormatException;
 
-public abstract class Date implements DateInput {
+public abstract class Date implements DateInput, Serializable {
+	private static final long serialVersionUID = -7708937313837438467L;
 	protected Month month = Month.Month30;		// default °ª ¼³Á¤
 	protected int income;
 	protected int expense;

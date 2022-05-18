@@ -1,11 +1,40 @@
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.InputMismatchException;
 import java.util.Scanner;    										// scanner 클래스 import
+import log.EventLogger;
 
 public class MenuManager {   										// 
+	static EventLogger logger = new EventLogger("log.txt");
+	
 	public static void main(String[] args) {  						// main 함수 
+		
 		Scanner input = new Scanner(System.in);						// 스캐너 생성
-		MoneyManager moneyManager = new MoneyManager(input);		// 메모리할당
+		MoneyManager moneyManager = getObject("moneymanager.ser");
+		if(moneyManager == null) {
+			moneyManager = new MoneyManager(input);
+		}
+
 		showMenu();
+		selectMenu(input, moneyManager);
+		putObject(moneyManager, "moneymanager.ser");
+	} 	
+	
+	public static void showMenu() {
+		System.out.println("*** Money Manager ***");
+		System.out.println("1. Add Content");					// 1-5번까지 메뉴 출력
+		System.out.println("2. Delete Content");
+		System.out.println("3. Edit Content");
+		System.out.println("4. Show Content");
+		System.out.println("5. Exit");							
+		System.out.print("Select one number between 1 - 5: ");	// 1-5번 중에서 선택하라는 말 출력
+	}
+	
+	public static void selectMenu(Scanner input, MoneyManager moneyManager) {
 		int num = 0;        				  						// int num 선언 및 0 저장
 		while(num != 5) {											// 입력받은 num 값이 5이 아닐 때 반복문 수행
 			try {
@@ -13,15 +42,19 @@ public class MenuManager {   										//
 				switch(num) {
 				case 1:		// 입력 받은 num이 1일 때
 					moneyManager.addContent();		// addContent 메서드로 이동
+					logger.log("add a content");
 					break;
 				case 2:		// 2일 때
 					moneyManager.deleteContent();	// deleteContent 메서드로 이동
+					logger.log("delete a content");
 					break;
 				case 3:		// 3일 때
 					moneyManager.editContent();		// editContent 메서드로 이동
+					logger.log("edit a content");
 					break;
 				case 4:		// 4일 때
 					moneyManager.showContent();		// showContent 메서드로 이동
+					logger.log("show a content");
 					break;
 				default: 
 					continue;
@@ -37,16 +70,43 @@ public class MenuManager {   										//
 				showMenu();
 			}
 		}	
-	} 	
+	}
 	
-	public static void showMenu() {
-		System.out.println("*** Money Manager ***");
-		System.out.println("1. Add Content");					// 1-5번까지 메뉴 출력
-		System.out.println("2. Delete Content");
-		System.out.println("3. Edit Content");
-		System.out.println("4. Show Content");
-		System.out.println("5. Exit");							
-		System.out.print("Select one number between 1 - 5: ");	// 1-5번 중에서 선택하라는 말 출력
+	public static MoneyManager getObject(String filename) {
+		MoneyManager moneyManager = null;
+		try {
+			FileInputStream file = new FileInputStream(filename);
+			ObjectInputStream in = new ObjectInputStream(file);
+			
+			moneyManager = (MoneyManager)in.readObject();
+			
+			in.close();
+			file.close();
+		} catch (FileNotFoundException e) {	
+			return moneyManager;
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		return moneyManager; 
+	}
+
+	public static void putObject(MoneyManager moneyManager, String filename) {
+		try {
+			FileOutputStream file = new FileOutputStream(filename);
+			ObjectOutputStream out = new ObjectOutputStream(file);
+			
+			out.writeObject(moneyManager);
+			
+			out.close();
+			file.close();
+		} catch (FileNotFoundException e) {	
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
 	}
 }
 /* 클래스 설명

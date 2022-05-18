@@ -4,6 +4,8 @@ import java.util.Scanner;
 import exception.Month1FormatException;
 
 public class February extends Date {
+	private static final long serialVersionUID = 8897983662350138611L;
+
 	public February(Month february) {
 		
 	}
