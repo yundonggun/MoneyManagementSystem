@@ -18,6 +18,9 @@ public class MenuManager {   										//
 		if(moneyManager == null) {
 			moneyManager = new MoneyManager(input);
 		}
+		else {				// 로그 파일이 있을 때, input을 할당
+			moneyManager.input = input;
+		}
 
 		showMenu();
 		selectMenu(input, moneyManager);
