@@ -1,8 +1,10 @@
+package manager;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import Money.Date;
 import Money.DateInput;
 import Money.February;
 import Money.Month;
@@ -124,6 +126,14 @@ public class MoneyManager implements Serializable {
 		for(int i = 0; i < dates.size(); i++) {
 			dates.get(i).printInfo();	// printInfo 메서드로 arraylist의 내용 출력
 		}
+	}
+	
+	public int size() {
+		return dates.size();
+	}
+	
+	public DateInput get(int index) {
+		return (Date) dates.get(index);
 	}
 	
 	public int findIndex(String somemonth, int someday) {

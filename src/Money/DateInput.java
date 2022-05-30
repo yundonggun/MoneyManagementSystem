@@ -9,6 +9,14 @@ public interface DateInput {
 	
 	public int getDay();
 	
+	public int getIncome();
+	
+	public int getExpense();
+	
+	public String getContent();
+	
+	public String getPlace();
+	
 	public void setIncome(int income);
 	
 	public void setExpense(int expense);

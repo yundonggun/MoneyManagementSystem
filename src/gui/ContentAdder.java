@@ -3,8 +3,11 @@ package gui;
 import java.awt.*;
 import javax.swing.*;
 
-public class ContentAdder extends JFrame {
-	public ContentAdder() {
+public class ContentAdder extends JPanel {
+	WindowFrame frame;
+	
+	public ContentAdder(WindowFrame frame) {
+		this.frame = frame;
 		JPanel panel = new JPanel();
 		panel.setLayout(new SpringLayout());
 		
@@ -49,9 +52,7 @@ public class ContentAdder extends JFrame {
 		
 		SpringUtilities.makeCompactGrid(panel, 7, 2, 6, 6, 6, 6);
 		// panel을 격자 모양으로 나타냄
-		this.setSize(300, 300);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setContentPane(panel);
-		this.setVisible(true);
+
+		this.add(panel);
 	}
 }
