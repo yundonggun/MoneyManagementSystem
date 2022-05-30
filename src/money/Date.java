@@ -1,4 +1,4 @@
-package Money;
+package money;
 
 import java.io.Serializable;
 import java.util.Scanner;

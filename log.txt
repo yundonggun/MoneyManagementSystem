@@ -1,2 +1,0 @@
-5월 30, 2022 9:55:31 오후 log.EventLogger log
-정보: show a content

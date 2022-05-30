@@ -5,8 +5,8 @@ import java.util.Vector;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import Money.DateInput;
 import manager.MoneyManager;
+import money.DateInput;
 
 public class ContentViewer extends JPanel {
 	WindowFrame frame;

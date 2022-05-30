@@ -1,4 +1,4 @@
-package Money;
+package money;
 
 import java.util.Scanner;
 import exception.Month1FormatException;

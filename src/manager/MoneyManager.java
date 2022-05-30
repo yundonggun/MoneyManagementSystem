@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import Money.Date;
-import Money.DateInput;
-import Money.February;
-import Money.Month;
-import Money.Month30;
-import Money.Month31;
+import money.Date;
+import money.DateInput;
+import money.February;
+import money.Month;
+import money.Month30;
+import money.Month31;
 
 public class MoneyManager implements Serializable {
 	private static final long serialVersionUID = 1145197048678055359L;	// serializable
