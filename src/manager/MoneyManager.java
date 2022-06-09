@@ -19,6 +19,16 @@ public class MoneyManager implements Serializable {
 		this.input = input;	
 	}
 	
+	public void addContent(String month, String day, String income, String expense, String content, String place) {
+		DateInput dateInput = new Month30(Month.Month30);	
+		dateInput.getUserInput(input);	
+		dates.add(dateInput);
+	}
+	
+	public void addContent(DateInput dateInput) {
+		dates.add(dateInput);
+	}
+	
 	public void addContent() {
 		int num = 0;
 		DateInput dateInput;	// 생성자
@@ -56,6 +66,10 @@ public class MoneyManager implements Serializable {
 				num = 0;
 			} 
 		}
+	}
+	
+	public void deleteContent(DateInput dateInput, int index) {
+		dates.remove(index);
 	}
 	
 	public void deleteContent() {				
@@ -127,10 +141,7 @@ public class MoneyManager implements Serializable {
 			dates.get(i).printInfo();	// printInfo 메서드로 arraylist의 내용 출력
 		}
 	}
-	
-	public int size() {
-		return dates.size();
-	}
+
 	
 	public DateInput get(int index) {
 		return (Date) dates.get(index);
@@ -150,7 +161,7 @@ public class MoneyManager implements Serializable {
 	}
 	
 	public int removefromDates(int index, String somemonth, int someday) {
-		if (index >= 0) {		
+		if (index >= -1) {		
 			dates.remove(index);
 			System.out.println("The data of " + somemonth + " " + someday + " is deleted.");
 			return 1;
@@ -159,6 +170,10 @@ public class MoneyManager implements Serializable {
 			System.out.println("The day has not been registered.");
 			return -1;	// index 값이 변하지 않으면 등록된 날이 없다고 출력.
 		}
+	}
+	
+	public int size() {
+		return dates.size();
 	}
 	
 	public void showEditMenu() {

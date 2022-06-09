@@ -5,17 +5,18 @@ import java.awt.event.ActionListener;
 
 import gui.WindowFrame;
 
-public class ButtonAddListener implements ActionListener {		// add 버튼 눌렀을 때 화면 변경
+public class ButtonDeleteListener implements ActionListener {
 	WindowFrame frame;
 	
-	public ButtonAddListener(WindowFrame frame) {
+	public ButtonDeleteListener(WindowFrame frame) {
 		this.frame = frame;
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		frame.getContentPane().removeAll();
-		frame.getContentPane().add(frame.getContentadder());
+		frame.getContentPane().add(frame.getContentdelete());
 		frame.revalidate();
 		frame.repaint();
 	}
 }
+

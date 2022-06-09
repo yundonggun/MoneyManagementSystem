@@ -11,6 +11,8 @@ public class WindowFrame extends JFrame {
 	MenuSelection menuselection;
 	ContentAdder contentadder;
 	ContentViewer contentviewer;
+	ContentDelete contentdelete;
+	ContentEdit contentedit;
 	
 	public WindowFrame(MoneyManager moneyManager) {
 		this.setSize(500, 300);
@@ -18,7 +20,9 @@ public class WindowFrame extends JFrame {
 		
 		this.moneyManager = moneyManager;
 		menuselection = new MenuSelection(this);
-		contentadder = new ContentAdder(this);
+		contentadder = new ContentAdder(this, this.moneyManager);
+		contentdelete = new ContentDelete(this, this.moneyManager);
+		contentedit = new ContentEdit(this, this.moneyManager);
 		contentviewer = new ContentViewer(this, this.moneyManager);
 		
 		this.setupPanel(menuselection);
@@ -56,5 +60,20 @@ public class WindowFrame extends JFrame {
 	public void setContentviewer(ContentViewer contentviewer) {
 		this.contentviewer = contentviewer;
 	}
-
+	
+	public ContentDelete getContentdelete() {
+		return contentdelete;
+	}
+	
+	public void setContentdelete(ContentDelete contentdelete) {
+		this.contentdelete = contentdelete;
+	}
+	
+	public ContentEdit getContentedit() {
+		return contentedit;
+	}
+	
+	public void setContentedit(ContentEdit contentedit) {
+		this.contentedit = contentedit;
+	}
 }

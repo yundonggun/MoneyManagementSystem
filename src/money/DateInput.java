@@ -2,6 +2,8 @@ package money;
 
 import java.util.Scanner;
 
+import exception.Month1FormatException;
+
 public interface DateInput {
 	public void getUserInput(Scanner input);
 	
@@ -16,6 +18,10 @@ public interface DateInput {
 	public String getContent();
 	
 	public String getPlace();
+	
+	public void setMonth1(String month1) throws Month1FormatException;
+	
+	public void setDay(int day);
 	
 	public void setIncome(int income);
 	

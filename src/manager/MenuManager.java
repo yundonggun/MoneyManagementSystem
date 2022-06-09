@@ -96,7 +96,6 @@ public class MenuManager {   										//
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		
 		return moneyManager; 
 	}
 

@@ -3,14 +3,14 @@ package gui;
 import javax.swing.*;
 
 import listener.ButtonCancelListener;
-import listener.ContentAdderListener;
+import listener.ContentEditListener;
 import manager.MoneyManager;
 
-public class ContentAdder extends JPanel {
+public class ContentEdit extends JPanel {
 	WindowFrame frame;
 	MoneyManager moneyManager;
 	
-	public ContentAdder(WindowFrame frame, MoneyManager moneyManager) {
+	public ContentEdit(WindowFrame frame, MoneyManager moneyManager) {
 		this.frame = frame;
 		this.moneyManager = moneyManager;
 		
@@ -53,15 +53,15 @@ public class ContentAdder extends JPanel {
 		panel.add(labelPlace);
 		panel.add(fieldPlace);
 		
-		JButton saveButton = new JButton("Save");
-		saveButton.addActionListener(new ContentAdderListener(fieldMonth, fieldDay, 
+		JButton editButton = new JButton("Edit");
+		editButton.addActionListener(new ContentEditListener(fieldMonth, fieldDay, 
 				fieldIncome, fieldExpense, fieldContent, fieldPlace, moneyManager));
 		
 		JButton cancelButton = new JButton("Cancel");
 		cancelButton.addActionListener(new ButtonCancelListener(frame));
 
 		
-		panel.add(saveButton);
+		panel.add(editButton);
 		panel.add(cancelButton);
 		
 		SpringUtilities.makeCompactGrid(panel, 7, 2, 6, 6, 6, 6);
