@@ -45,6 +45,7 @@ public class ContentViewer extends JPanel {
 		
 		JTable table = new JTable(model);	// table에 model 저장
 		table.setSize(400, 400);
+		
 		JScrollPane sp = new JScrollPane(table);	
 		sp.setPreferredSize(new Dimension(400, 200));
 
@@ -87,6 +88,7 @@ public class ContentViewer extends JPanel {
 				
 		JTable table = new JTable(model);	// table에 model 저장
 		table.setSize(400, 400);
+		
 		JScrollPane sp = new JScrollPane(table);
 		sp.setPreferredSize(new Dimension(400, 200));
 		

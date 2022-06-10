@@ -19,4 +19,3 @@ public class ButtonDeleteListener implements ActionListener {
 		frame.repaint();
 	}
 }
-

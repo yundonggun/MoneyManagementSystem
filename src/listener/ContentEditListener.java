@@ -77,7 +77,3 @@ public class ContentEditListener implements ActionListener {		// edit ∫Œ∫–¿∫ ±‚¡
 		} 
 	}
 }
-
-
-
-

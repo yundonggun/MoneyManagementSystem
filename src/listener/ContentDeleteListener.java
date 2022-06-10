@@ -58,7 +58,3 @@ public class ContentDeleteListener implements ActionListener {
 		} 
 	}
 }
-
-
-
-

@@ -60,7 +60,6 @@ public class ContentEdit extends JPanel {
 		JButton cancelButton = new JButton("Cancel");
 		cancelButton.addActionListener(new ButtonCancelListener(frame));
 
-		
 		panel.add(editButton);
 		panel.add(cancelButton);
 		

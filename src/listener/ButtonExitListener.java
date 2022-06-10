@@ -18,5 +18,4 @@ public class ButtonExitListener implements ActionListener {
 		frame.dispose();
 		System.exit(0);		// 프로그램 종료
 	}
-
 }

@@ -60,7 +60,6 @@ public class ContentAdder extends JPanel {
 		JButton cancelButton = new JButton("Cancel");
 		cancelButton.addActionListener(new ButtonCancelListener(frame));
 
-		
 		panel.add(saveButton);
 		panel.add(cancelButton);
 		
