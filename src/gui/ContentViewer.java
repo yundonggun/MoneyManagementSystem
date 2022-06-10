@@ -1,10 +1,13 @@
 package gui;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.util.Vector;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import listener.ButtonCancelListener;
 import manager.MoneyManager;
 import money.DateInput;
 
@@ -41,9 +44,19 @@ public class ContentViewer extends JPanel {
 		}
 		
 		JTable table = new JTable(model);	// table에 model 저장
-		JScrollPane sp = new JScrollPane(table);
+		table.setSize(400, 400);
+		JScrollPane sp = new JScrollPane(table);	
+		sp.setPreferredSize(new Dimension(400, 200));
+
+		JPanel panel = new JPanel();
 		
-		this.add(sp);		
+		JButton cancelButton = new JButton("Cancel");
+		cancelButton.addActionListener(new ButtonCancelListener(frame));
+		
+		panel.add(cancelButton, BorderLayout.SOUTH);
+		
+		this.add(sp);	
+		this.add(panel);
 	}
 
 	public ContentViewer(WindowFrame frame, MoneyManager moneyManager) {
@@ -73,8 +86,17 @@ public class ContentViewer extends JPanel {
 		}
 				
 		JTable table = new JTable(model);	// table에 model 저장
+		table.setSize(400, 400);
 		JScrollPane sp = new JScrollPane(table);
+		sp.setPreferredSize(new Dimension(400, 200));
+		
+		JPanel panel = new JPanel();
+		JButton cancelButton = new JButton("Cancel");
+		cancelButton.addActionListener(new ButtonCancelListener(frame));
+		
+		panel.add(cancelButton);
 		
 		this.add(sp);
+		this.add(panel);
 	}
 }
